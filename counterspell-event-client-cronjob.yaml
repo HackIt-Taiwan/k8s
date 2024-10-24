@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: counterspell-event-client-puller
 spec:
-  schedule: "*/1 * * * *"  # 每分鐘執行一次
+  schedule: "*/1 * * * *"
   jobTemplate:
     spec:
       template:

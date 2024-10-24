@@ -11,7 +11,7 @@ data:
     http {
         server {
             listen 80;
-            server_name localhost;
+            server_name _;
 
             location / {
                 proxy_pass http://counterspell-event-client:4173;
@@ -21,5 +21,10 @@ data:
                 proxy_set_header X-Forwarded-Host $host;
                 proxy_redirect off;
             }
+
+            # 示例：添加其他路徑的代理設定
+            # location /api/ {
+            #     proxy_pass http://another-service:8080;
+            # }
         }
     }
