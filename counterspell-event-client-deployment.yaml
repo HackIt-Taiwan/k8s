@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counterspell-event-client
+  labels:
+    app: counterspell-event-client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: counterspell-event-client
+  template:
+    metadata:
+      labels:
+        app: counterspell-event-client
+    spec:
+      containers:
+      - name: counterspell-event-client
+        image: yuwhisper/counterspell-event-client:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4173
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 4173
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 4173
+          initialDelaySeconds: 15
+          periodSeconds: 20

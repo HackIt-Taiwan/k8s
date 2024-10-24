@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: counterspell-event-client
+  labels:
+    app: counterspell-event-client
+spec:
+  selector:
+    app: counterspell-event-client
+  ports:
+  - protocol: TCP
+    port: 4173
+    targetPort: 4173
+  type: ClusterIP

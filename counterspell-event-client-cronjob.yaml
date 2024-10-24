@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: counterspell-event-client-puller
+spec:
+  schedule: "*/1 * * * *"  # 每分鐘執行一次
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl rollout restart deployment/counterspell-event-client
+          restartPolicy: OnFailure
