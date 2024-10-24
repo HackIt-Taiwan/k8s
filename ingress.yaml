@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: 34.80.135.158
+  - host: counterspell.local
     http:
       paths:
       - path: /
